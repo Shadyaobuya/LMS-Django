@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,85 +14,392 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_by', models.CharField(blank=True, db_comment='User who created record', help_text='User who created record', max_length=30, null=True)),
-                ('modified_by', models.CharField(blank=True, db_comment='User who modified record', help_text='User who modified record', max_length=30, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True, db_comment='Time record was created', help_text='Time record was created', max_length=30, null=True)),
-                ('modified_at', models.DateTimeField(auto_now_add=True, db_comment='Time record was modified', help_text='Time record was modified', max_length=30, null=True)),
-                ('name', models.CharField(help_text='Enter the name of the course', max_length=40)),
-                ('code', models.CharField(help_text='Enter the course code. Maximum 20 characters.', max_length=20, null=True)),
-                ('description', models.TextField(blank=True, help_text='Provide a brief description of the course.', null=True)),
-                ('lecturer', models.ForeignKey(help_text='Select the lecturer responsible for the course.', on_delete=django.db.models.deletion.CASCADE, related_name='lecturer_courses', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(
+                        blank=True,
+                        db_comment="User who created record",
+                        help_text="User who created record",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "modified_by",
+                    models.CharField(
+                        blank=True,
+                        db_comment="User who modified record",
+                        help_text="User who modified record",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        db_comment="Time record was created",
+                        help_text="Time record was created",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "modified_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        db_comment="Time record was modified",
+                        help_text="Time record was modified",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Enter the name of the course", max_length=40
+                    ),
+                ),
+                (
+                    "code",
+                    models.CharField(
+                        help_text="Enter the course code. Maximum 20 characters.",
+                        max_length=20,
+                        null=True,
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True,
+                        help_text="Provide a brief description of the course.",
+                        null=True,
+                    ),
+                ),
+                (
+                    "lecturer",
+                    models.ForeignKey(
+                        help_text="Select the lecturer responsible for the course.",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="lecturer_courses",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'db_table': 'course',
+                "db_table": "course",
             },
         ),
         migrations.CreateModel(
-            name='CourseEnrollment',
+            name="CourseEnrollment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_by', models.CharField(blank=True, db_comment='User who created record', help_text='User who created record', max_length=30, null=True)),
-                ('modified_by', models.CharField(blank=True, db_comment='User who modified record', help_text='User who modified record', max_length=30, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True, db_comment='Time record was created', help_text='Time record was created', max_length=30, null=True)),
-                ('modified_at', models.DateTimeField(auto_now_add=True, db_comment='Time record was modified', help_text='Time record was modified', max_length=30, null=True)),
-                ('date_enrolled', models.DateTimeField(auto_now_add=True, help_text='Date and time when the student enrolled in the course.', null=True)),
-                ('status', models.CharField(choices=[('active', 'Active'), ('completed', 'Completed'), ('dropped', 'Dropped')], default='active', help_text='Enrollment status of the student in the course.', max_length=20)),
-                ('grade', models.IntegerField(blank=True, help_text='Grade obtained by the student in the course.', null=True)),
-                ('course', models.ForeignKey(help_text='Select the course for enrollment.', on_delete=django.db.models.deletion.CASCADE, related_name='enrolled_students', to='course.course')),
-                ('student', models.ForeignKey(help_text='Select the student enrolling in the course.', on_delete=django.db.models.deletion.CASCADE, related_name='enrolled_courses', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(
+                        blank=True,
+                        db_comment="User who created record",
+                        help_text="User who created record",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "modified_by",
+                    models.CharField(
+                        blank=True,
+                        db_comment="User who modified record",
+                        help_text="User who modified record",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        db_comment="Time record was created",
+                        help_text="Time record was created",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "modified_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        db_comment="Time record was modified",
+                        help_text="Time record was modified",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "date_enrolled",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        help_text="Date and time when the student enrolled in the course.",
+                        null=True,
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("active", "Active"),
+                            ("completed", "Completed"),
+                            ("dropped", "Dropped"),
+                        ],
+                        default="active",
+                        help_text="Enrollment status of the student in the course.",
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "grade",
+                    models.IntegerField(
+                        blank=True,
+                        help_text="Grade obtained by the student in the course.",
+                        null=True,
+                    ),
+                ),
+                (
+                    "course",
+                    models.ForeignKey(
+                        help_text="Select the course for enrollment.",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="enrolled_students",
+                        to="course.course",
+                    ),
+                ),
+                (
+                    "student",
+                    models.ForeignKey(
+                        help_text="Select the student enrolling in the course.",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="enrolled_courses",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'db_table': 'course_enrollment',
+                "db_table": "course_enrollment",
             },
         ),
         migrations.CreateModel(
-            name='Topic',
+            name="Topic",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_by', models.CharField(blank=True, db_comment='User who created record', help_text='User who created record', max_length=30, null=True)),
-                ('modified_by', models.CharField(blank=True, db_comment='User who modified record', help_text='User who modified record', max_length=30, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True, db_comment='Time record was created', help_text='Time record was created', max_length=30, null=True)),
-                ('modified_at', models.DateTimeField(auto_now_add=True, db_comment='Time record was modified', help_text='Time record was modified', max_length=30, null=True)),
-                ('name', models.CharField(help_text='Name of the topic.', max_length=100)),
-                ('description', models.TextField(help_text='Short summary of the topic.')),
-                ('video_url', models.URLField(blank=True, help_text='The link to the topic', null=True)),
-                ('document', models.FileField(blank=True, help_text='Upload the topic file. Allowed formats: PDF, DOCX.', null=True, upload_to='topics/')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='topics', to='course.course')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(
+                        blank=True,
+                        db_comment="User who created record",
+                        help_text="User who created record",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "modified_by",
+                    models.CharField(
+                        blank=True,
+                        db_comment="User who modified record",
+                        help_text="User who modified record",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        db_comment="Time record was created",
+                        help_text="Time record was created",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "modified_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        db_comment="Time record was modified",
+                        help_text="Time record was modified",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(help_text="Name of the topic.", max_length=100),
+                ),
+                (
+                    "description",
+                    models.TextField(help_text="Short summary of the topic."),
+                ),
+                (
+                    "video_url",
+                    models.URLField(
+                        blank=True, help_text="The link to the topic", null=True
+                    ),
+                ),
+                (
+                    "document",
+                    models.FileField(
+                        blank=True,
+                        help_text="Upload the topic file. Allowed formats: PDF, DOCX.",
+                        null=True,
+                        upload_to="topics/",
+                    ),
+                ),
+                (
+                    "course",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="topics",
+                        to="course.course",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'topic',
+                "db_table": "topic",
             },
         ),
         migrations.CreateModel(
-            name='Assignment',
+            name="Assignment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_by', models.CharField(blank=True, db_comment='User who created record', help_text='User who created record', max_length=30, null=True)),
-                ('modified_by', models.CharField(blank=True, db_comment='User who modified record', help_text='User who modified record', max_length=30, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True, db_comment='Time record was created', help_text='Time record was created', max_length=30, null=True)),
-                ('modified_at', models.DateTimeField(auto_now_add=True, db_comment='Time record was modified', help_text='Time record was modified', max_length=30, null=True)),
-                ('name', models.CharField(default='', help_text='Enter the name of the assignment. Maximum 30 characters.', max_length=30)),
-                ('document', models.FileField(blank=True, help_text='Upload the assignment document. Allowed formats: PDF, DOCX.', null=True, upload_to='assignments')),
-                ('description', models.TextField(blank=True, help_text='Provide a brief description of the assignment.', null=True)),
-                ('assignment_topic', models.ForeignKey(help_text='topic tied to assignment', on_delete=django.db.models.deletion.CASCADE, related_name='assignment_topics', to='course.topic')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(
+                        blank=True,
+                        db_comment="User who created record",
+                        help_text="User who created record",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "modified_by",
+                    models.CharField(
+                        blank=True,
+                        db_comment="User who modified record",
+                        help_text="User who modified record",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        db_comment="Time record was created",
+                        help_text="Time record was created",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "modified_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        db_comment="Time record was modified",
+                        help_text="Time record was modified",
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        default="",
+                        help_text="Enter the name of the assignment. Maximum 30 characters.",
+                        max_length=30,
+                    ),
+                ),
+                (
+                    "document",
+                    models.FileField(
+                        blank=True,
+                        help_text="Upload the assignment document. Allowed formats: PDF, DOCX.",
+                        null=True,
+                        upload_to="assignments",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True,
+                        help_text="Provide a brief description of the assignment.",
+                        null=True,
+                    ),
+                ),
+                (
+                    "assignment_topic",
+                    models.ForeignKey(
+                        help_text="topic tied to assignment",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="assignment_topics",
+                        to="course.topic",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'assignment_course',
+                "db_table": "assignment_course",
             },
         ),
         migrations.AddConstraint(
-            model_name='course',
-            constraint=models.UniqueConstraint(fields=('name', 'lecturer'), name='unique-course-lecturer'),
+            model_name="course",
+            constraint=models.UniqueConstraint(
+                fields=("name", "lecturer"), name="unique-course-lecturer"
+            ),
         ),
         migrations.AddConstraint(
-            model_name='courseenrollment',
-            constraint=models.UniqueConstraint(fields=('student', 'course'), name='unique-student-course-enrollment'),
+            model_name="courseenrollment",
+            constraint=models.UniqueConstraint(
+                fields=("student", "course"), name="unique-student-course-enrollment"
+            ),
         ),
         migrations.AddConstraint(
-            model_name='topic',
-            constraint=models.UniqueConstraint(fields=('course', 'name'), name='unique-topic-course'),
+            model_name="topic",
+            constraint=models.UniqueConstraint(
+                fields=("course", "name"), name="unique-topic-course"
+            ),
         ),
     ]

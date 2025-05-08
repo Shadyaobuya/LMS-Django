@@ -30,15 +30,12 @@ class Course(ModificationTrackingModel):
         blank=True,
         help_text="Provide a brief description of the course.",
     )
-   
-    
-        
+
     class Meta:
         db_table = "course"
         constraints = [
             models.UniqueConstraint(
-                fields=['name', 'lecturer'],
-                name='unique-course-lecturer'
+                fields=["name", "lecturer"], name="unique-course-lecturer"
             )
         ]
 
@@ -72,78 +69,66 @@ class CourseEnrollment(ModificationTrackingModel):
     status = models.CharField(
         max_length=20,
         choices=[
-            ('active', 'Active'),
-            ('completed', 'Completed'),
-            ('dropped', 'Dropped'),
+            ("active", "Active"),
+            ("completed", "Completed"),
+            ("dropped", "Dropped"),
         ],
-        default='active',
+        default="active",
         help_text="Enrollment status of the student in the course.",
     )
-    grade=models.IntegerField(
+    grade = models.IntegerField(
         null=True,
         blank=True,
         help_text="Grade obtained by the student in the course.",
-
     )
 
     class Meta:
         db_table = "course_enrollment"
         constraints = [
             models.UniqueConstraint(
-                fields=['student', 'course'],
-                name='unique-student-course-enrollment'
+                fields=["student", "course"], name="unique-student-course-enrollment"
             )
         ]
+
     def __str__(self):
         return f"{self.__class__.__name__} : {self.student.username}-{self.course.name}"
 
 
 class Topic(ModificationTrackingModel):
-    name=models.CharField(
+    name = models.CharField(
         max_length=100,
         null=False,
         blank=False,
         help_text="Name of the topic.",
     )
-    description=models.TextField(
+    description = models.TextField(
         null=False,
         blank=False,
         help_text="Short summary of the topic.",
     )
-    video_url=models.URLField(
-        null=True,
-        blank=True,
-        help_text="The link to the topic"
+    video_url = models.URLField(
+        null=True, blank=True, help_text="The link to the topic"
     )
-    document=models.FileField(
+    document = models.FileField(
         upload_to="topics/",
         null=True,
         blank=True,
         help_text="Upload the topic file. Allowed formats: PDF, DOCX.",
-    
-        
     )
     course = models.ForeignKey(
-        Course,
-        related_name="topics",
-        on_delete=models.CASCADE,
-        null=False,
-        blank=False
-        
+        Course, related_name="topics", on_delete=models.CASCADE, null=False, blank=False
     )
 
     class Meta:
         db_table = "topic"
         constraints = [
             models.UniqueConstraint(
-                fields=['course', 'name'],
-                name='unique-topic-course'
+                fields=["course", "name"], name="unique-topic-course"
             )
         ]
-    
+
     def __str__(self):
-        return  f"{self.__class__.__name__} : {self.name}"
-    
+        return f"{self.__class__.__name__} : {self.name}"
 
 
 class Assignment(ModificationTrackingModel):
